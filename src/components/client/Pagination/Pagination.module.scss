@@ -1,0 +1,32 @@
+@use '@/shared/styles/variables' as *;
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pageButton {
+  width: 38px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: $text-primary-color;
+  cursor: pointer;
+  font-weight: 500;
+  border: none;
+
+  &.active {
+    background-color: $brand-color;
+    color: $button-primary-text-color;
+  }
+}
+.ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}

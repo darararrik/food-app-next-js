@@ -1,0 +1,45 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as mix;
+
+.loginModal {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.errorText {
+  color: $error-text-color;
+  text-align: center;
+  margin: -8px 0;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 8px;
+
+  span {
+    color: $brand-color;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

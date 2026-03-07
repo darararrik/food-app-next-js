@@ -1,0 +1,57 @@
+@use '@/shared/styles/variables' as *;
+
+.card {
+  border-radius: $border-radius;
+  background-color: $card-bg;
+  padding-bottom: $space-xl;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  overflow: hidden;
+  &:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.card__image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  padding: $space-xs $space-xs 0;
+  gap: $space-xl;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xxs;
+}
+
+.card__footer {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.card__actionSlot {
+  margin-left: auto;
+}
+.card__contentSlot {
+  color: $brand-color;
+}
+.card__caption {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

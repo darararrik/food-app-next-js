@@ -1,0 +1,42 @@
+@use '@/shared/styles/variables' as *;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.message {
+  color: $text-secondary-color;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.cancelButton {
+  background: transparent;
+  border: 1px solid $text-secondary-color;
+  color: $text-primary-color;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.confirmButton {
+  background: $brand-color;
+  color: $button-primary-text-color;
+
+  &:hover {
+    background: $brand-hover-color;
+  }
+}

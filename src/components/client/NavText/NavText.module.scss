@@ -1,0 +1,16 @@
+@use '@/shared/styles/variables' as *;
+
+.link {
+  text-decoration: none;
+  color: $text-primary-color;
+  transition: color 0.2s;
+
+  &:hover p {
+    color: $brand-color;
+  }
+}
+
+.active p {
+  color: $brand-color;
+  font-weight: 600;
+}

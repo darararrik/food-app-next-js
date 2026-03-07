@@ -1,0 +1,40 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as mix;
+.multiDropdownWrapper {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  @include mix.font-family(400);
+}
+
+.multiDropdownOptions {
+  position: absolute;
+  top: 100%;
+  width: 300px;
+  max-height: 200px;
+  background-color: $dropdown-options-bg;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  margin-top: $space-xxs;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.multiDropdownOption {
+  padding: $space-s $space-xs;
+  color: $text-primary-color;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+
+  &:hover {
+    background-color: $dropdown-option-hover-bg;
+    color: $text-secondary-color;
+  }
+
+  &.multiDropdownOption_selected {
+    color: $brand-color;
+    font-weight: 500;
+  }
+}

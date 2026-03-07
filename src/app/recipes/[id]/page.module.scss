@@ -1,0 +1,83 @@
+@use "@/shared/styles/variables" as *;
+@use "@/shared/styles/mixins" as mix;
+
+.main {
+  padding: 0 100px;
+  margin-top: 49px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+
+  @include mix.respond(lg) {
+    padding: 0 64px;
+    gap: 48px;
+  }
+  @include mix.respond(md) {
+    padding: 0 32px;
+    gap: 40px;
+  }
+  @include mix.respond(sm) {
+    padding: 0 16px;
+    gap: 32px;
+    margin-top: 32px;
+  }
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 37px;
+  flex-wrap: wrap;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+
+  @include mix.respond(lg) {
+    gap: 48px;
+  }
+  @include mix.respond(md) {
+    gap: 40px;
+  }
+}
+
+.summaryContainer {
+  background-color: #b5460f54;
+  padding: 36px;
+  border-radius: $border-radius;
+
+  @include mix.respond(md) {
+    padding: 24px;
+  }
+  @include mix.respond(sm) {
+    padding: 16px;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: $brand-active-color;
+  font-size: 48px;
+  @include mix.font-family;
+}

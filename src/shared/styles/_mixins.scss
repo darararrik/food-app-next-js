@@ -1,0 +1,44 @@
+@use './variables' as vars;
+@use 'sass:map';
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin font-family($weight: 500) {
+  font-family: vars.$font-family;
+  font-weight: $weight;
+}
+
+@mixin respond($breakpoint) {
+  @if map.has-key(vars.$breakpoints, $breakpoint) {
+    $value: map.get(vars.$breakpoints, $breakpoint);
+
+    @media (max-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$breakpoint}.";
+  }
+}
+@mixin mobile-only {
+  @media (max-width: #{vars.$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media (min-width: calc(#{vars.$breakpoint-md} + 1px)) and (max-width: #{vars.$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @media (min-width: calc(#{vars.$breakpoint-lg} + 1px)) {
+    @content;
+  }
+}
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}

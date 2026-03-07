@@ -1,0 +1,39 @@
+@use "@/shared/styles/mixins" as mix;
+
+.favoritesPage {
+  padding: 40px 100px;
+
+  @include mix.respond(lg) {
+    padding: 30px 64px;
+  }
+  @include mix.respond(md) {
+    padding: 24px 32px;
+  }
+}
+
+.title {
+  margin-bottom: 40px;
+}
+
+.recipesSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 64px;
+  column-gap: 80px;
+
+  @include mix.respond(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include mix.respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty,
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  opacity: 0.5;
+}

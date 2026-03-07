@@ -1,0 +1,24 @@
+@use "@/shared/styles/mixins" as mix;
+
+.recipesSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 64px;
+  column-gap: 80px;
+
+  @include mix.respond(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include mix.respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+.noRecipes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+  text-align: center;
+  @include mix.font-family();
+  font-size: 24px;
+}
