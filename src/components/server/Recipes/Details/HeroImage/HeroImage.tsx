@@ -2,7 +2,7 @@ import type { Recipe } from "@/types/models/Recipe";
 import InfoText from "../InfoText/InfoText";
 import styles from "./HeroImage.module.scss";
 import React from "react";
-
+import Image from "next/image";
 type HeroImageProps = {
   recipe: Recipe;
 };
@@ -14,7 +14,13 @@ const HeroImage: React.FC<HeroImageProps> = ({ recipe }) => {
 
   return (
     <div className={styles.imageContainer}>
-      <img src={recipeImage} alt={recipe.name} className={styles.heroImage} />
+      <Image
+        src={recipeImage || ""}
+        alt={recipe.name}
+        className={styles.heroImage}
+        width={448}
+        height={448}
+      />
       <div className={styles.infoContainer}>
         <InfoText
           title="Preparation"
