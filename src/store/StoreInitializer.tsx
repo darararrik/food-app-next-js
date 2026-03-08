@@ -10,7 +10,7 @@ export const StoreInitializer = observer(
 
     useEffect(() => {
       if (userStore.isAuthenticated) {
-        favoriteStore.fetchFavorites();
+        favoriteStore.fetchRecipes();
       }
     }, [userStore.isAuthenticated, favoriteStore]);
 

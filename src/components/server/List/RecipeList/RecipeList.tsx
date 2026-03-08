@@ -1,13 +1,30 @@
 import React from "react";
 import RecipeCard from "@/components/server/Cards/RecipeCard";
+import RecipeCardSkeleton from "../../Cards/CardSkeleton/RecipeCardSkeleton";
 import type { Recipe } from "@/types/models/Recipe";
 import styles from "./RecipeList.module.scss";
 
 type RecipeListProps = {
   recipes: Recipe[];
+  isLoading: boolean;
 };
 
-export const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
+export const RecipeList: React.FC<RecipeListProps> = ({
+  recipes,
+  isLoading,
+}) => {
+  // Показываем скелетоны во время загрузки
+  if (isLoading) {
+    return (
+      <section className={styles.recipesSection}>
+        {Array.from({ length: 12 }).map((_, i) => (
+          <RecipeCardSkeleton key={i} />
+        ))}
+      </section>
+    );
+  }
+
+  // Если загрузка прошла, но рецептов нет
   if (recipes.length === 0) {
     return <div className={styles.noRecipes}>Recipes not found</div>;
   }
@@ -15,7 +32,7 @@ export const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
   return (
     <section className={styles.recipesSection}>
       {recipes.map((recipe) => (
-        <RecipeCard key={recipe.documentId} recipe={recipe} />
+        <RecipeCard key={recipe.id} recipe={recipe} />
       ))}
     </section>
   );

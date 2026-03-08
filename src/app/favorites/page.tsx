@@ -13,12 +13,12 @@ const FavoritesPageContent = observer(() => {
   const { favoriteStore } = useRootStore();
 
   useEffect(() => {
-    favoriteStore.fetchFavorites();
+    favoriteStore.fetchRecipes();
   }, [favoriteStore]);
 
   if (
-    favoriteStore.favorites === undefined ||
-    favoriteStore.favorites.length === 0
+    favoriteStore.recipes === undefined ||
+    favoriteStore.recipes.length === 0
   ) {
     if (favoriteStore.isLoading) {
       return (
@@ -40,7 +40,7 @@ const FavoritesPageContent = observer(() => {
         Favorites
       </Text>
       <section className={styles.recipesSection}>
-        {favoriteStore.favorites.map((recipe) => (
+        {favoriteStore.recipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe} />
         ))}
       </section>

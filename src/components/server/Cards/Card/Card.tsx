@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React from "react";
 import Text from "@/components/server/Text";
 import styles from "./Card.module.scss";
-
+import Image from "next/image";
 export type CardProps = {
   className?: string;
   image: string;
@@ -27,7 +27,15 @@ const Card: React.FC<CardProps> = ({
   return (
     <div className={classNames(styles.card, className)} onClick={onClick}>
       <div className={styles.card__header}>
-        {image && <img src={image} alt="" className={styles.card__image} />}
+        {image && (
+          <Image
+            src={image}
+            alt=""
+            width={200}
+            height={200}
+            className={styles.card__image}
+          />
+        )}
       </div>
       <div className={styles.card__body}>
         <div className={styles.card__content}>

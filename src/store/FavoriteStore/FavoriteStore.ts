@@ -3,10 +3,10 @@ import { RecipeApi } from "@/api/recipe";
 import type { Recipe } from "@/types/models/Recipe";
 import type { UserStore } from "@/store/UserStore/UserStore";
 
-type PrivateFields = "_favorites" | "_isLoading" | "_showLoginModal";
+type PrivateFields = "_recipes" | "_isLoading" | "_showLoginModal";
 
 export class FavoriteStore {
-  private _favorites: Recipe[] = [];
+  private _recipes: Recipe[] = [];
   private _isLoading = false;
   private _showLoginModal = false;
   private readonly _userStore: UserStore;
@@ -16,8 +16,8 @@ export class FavoriteStore {
     this._userStore = userStore;
   }
 
-  get favorites(): Recipe[] {
-    return this._favorites;
+  get recipes(): Recipe[] {
+    return this._recipes;
   }
 
   get isLoading(): boolean {
@@ -30,19 +30,22 @@ export class FavoriteStore {
 
   get isFavorite() {
     return (recipeId: string) =>
-      this._favorites.some((fav) => fav.documentId === recipeId);
+      this._recipes.some((fav) => fav.documentId === recipeId);
   }
 
   setShowLoginModal(value: boolean) {
     this._showLoginModal = value;
   }
+  setRecipes(recipes: Recipe[]) {
+    this._recipes = recipes;
+  }
 
-  async fetchFavorites() {
+  async fetchRecipes() {
     this._isLoading = true;
     try {
       const recipes = await RecipeApi.getFavoriteRecipes();
       runInAction(() => {
-        this._favorites = recipes;
+        this._recipes = recipes;
         this._isLoading = false;
       });
     } catch (error) {
@@ -59,14 +62,12 @@ export class FavoriteStore {
       return;
     }
 
-    const isFavorite = this._favorites.some(
-      (fav) => fav.documentId === recipeId,
-    );
+    const isFavorite = this._recipes.some((fav) => fav.documentId === recipeId);
     try {
       if (isFavorite) {
         await RecipeApi.deleteRecipe(recipeId);
         runInAction(() => {
-          this._favorites = this._favorites.filter(
+          this._recipes = this._recipes.filter(
             (fav) => fav.documentId !== recipeId,
           );
         });
@@ -74,7 +75,7 @@ export class FavoriteStore {
         await RecipeApi.saveRecipe(recipeId);
         const recipe = await RecipeApi.getRecipeById(recipeId);
         runInAction(() => {
-          this._favorites.push(recipe);
+          this._recipes.push(recipe);
         });
       }
     } catch (error) {

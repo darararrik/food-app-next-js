@@ -1,5 +1,5 @@
 import type { StrapiResponse } from "@/types/StrapiResponse";
-import type { CategoryDto } from "@/types/dto/CategoryDto";
+import { toModel, type CategoryDto } from "@/types/dto/CategoryDto";
 import { httpClient } from "./httpClient";
 
 export const CategoryApi = {
@@ -12,6 +12,6 @@ export const CategoryApi = {
         },
       },
     );
-    return response.data;
+    return response.data.map((r) => toModel(r));
   },
 };

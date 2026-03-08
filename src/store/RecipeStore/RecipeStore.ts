@@ -47,7 +47,9 @@ export class RecipeStore implements ILocalStore {
   get isLoading(): boolean {
     return this._isLoading;
   }
-
+  setRecipes(recipes: Recipe[]) {
+    this._recipes = recipes;
+  }
   setSearchQuery(query: string) {
     if (this._searchQuery !== query) {
       this._searchQuery = query;
