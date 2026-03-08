@@ -3,9 +3,9 @@ import Text from "@/components/server/Text";
 import heroRecipesText from "@/assets/hero-recipes.svg";
 import { RecipeApi } from "@/api/recipe";
 import { CategoryApi } from "@/api/category";
-import { RecipeList } from "../../components/server/List/RecipeList/RecipeList";
+import { RecipeList } from "@/components/server/List/RecipeList";
 import { SearchWrapper } from "./components/Search/SearchWrapper";
-import { PaginationWrapper } from "../../components/client/Pagination/components/PaginationWrapper";
+import { PaginationWrapper } from "@/components/client/Pagination/components/PaginationWrapper";
 
 type RecipesPageProps = {
   searchParams: { [key: string]: string | string[] | undefined };

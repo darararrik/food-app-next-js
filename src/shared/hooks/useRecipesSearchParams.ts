@@ -18,22 +18,28 @@ export const useRecipesSearchParams = (
     const query = searchParams.get("search") || "";
     const page = parseInt(searchParams.get("page") || "1", 10);
     const categoriesParams = searchParams.get("categories");
-    const selectedCategories = categoriesParams
-      ? categoriesParams.split(",").map((key: string) => {
-          const cat = categories.find((c) => c.key === key);
-          return { key, value: cat ? cat.value : key };
-        })
-      : [];
 
     store.setSearchQuery(query);
     store.setCurrentPage(page);
-    store.setSelectedOptions(selectedCategories);
+    if (!categoriesParams) {
+      store.setSelectedOptions([]);
+    } else if (categories.length > 0) {
+      const selectedCategories = categoriesParams
+        .split(",")
+        .filter(Boolean)
+        .map((key: string) => {
+          const trimmedKey = key.trim();
+          const cat = categories.find((c) => c.key === trimmedKey);
+          return { key: trimmedKey, value: cat ? cat.value : trimmedKey };
+        });
+      store.setSelectedOptions(selectedCategories);
+    }
 
     if (currentParamsStr !== lastParamsStr.current) {
       store.fetchRecipes();
       lastParamsStr.current = currentParamsStr;
     }
-  }, [searchParams, categories]);
+  }, [searchParams, categories, store]);
 
   const updateQueryParams = (params: {
     search?: string;
