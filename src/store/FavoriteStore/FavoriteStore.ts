@@ -49,7 +49,6 @@ export class FavoriteStore {
         this._isLoading = false;
       });
     } catch (error) {
-      console.error(error);
       runInAction(() => {
         this._isLoading = false;
       });
@@ -79,7 +78,6 @@ export class FavoriteStore {
         });
       }
     } catch (error) {
-      console.error(error);
     }
   }
 }

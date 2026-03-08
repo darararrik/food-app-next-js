@@ -36,7 +36,6 @@ export class CategoryStore {
         this._isLoading = false;
       });
     } catch (error) {
-      console.error(error);
       runInAction(() => {
         this._isLoading = false;
       });

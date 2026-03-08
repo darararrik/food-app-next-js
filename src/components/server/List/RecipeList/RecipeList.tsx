@@ -13,7 +13,6 @@ export const RecipeList: React.FC<RecipeListProps> = ({
   recipes,
   isLoading,
 }) => {
-  // Показываем скелетоны во время загрузки
   if (isLoading) {
     return (
       <section className={styles.recipesSection}>
@@ -24,7 +23,6 @@ export const RecipeList: React.FC<RecipeListProps> = ({
     );
   }
 
-  // Если загрузка прошла, но рецептов нет
   if (recipes.length === 0) {
     return <div className={styles.noRecipes}>Recipes not found</div>;
   }

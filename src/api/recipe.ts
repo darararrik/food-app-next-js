@@ -40,7 +40,12 @@ export const RecipeApi = {
 
     const response = await httpClient.get<StrapiResponse<RecipeDto[]>>(
       "/recipes",
-      { params },
+      {
+        params,
+        fetchOptions: {
+          next: { revalidate: 60 },
+        },
+      },
     );
     return {
       data: response.data.map(toModel),
@@ -57,6 +62,9 @@ export const RecipeApi = {
             page,
             pageSize: 12,
           },
+        },
+        fetchOptions: {
+          cache: "no-store",
         },
       });
 
@@ -79,7 +87,6 @@ export const RecipeApi = {
 
       return [];
     } catch (error) {
-      console.error(error);
       return [];
     }
   },

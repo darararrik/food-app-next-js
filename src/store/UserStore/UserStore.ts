@@ -34,7 +34,6 @@ export class UserStore {
     this._error = null;
     try {
       const response = await authApi.login(username, password);
-      console.log("response", response);
       if (response.jwt) {
         this.setToken(response.jwt);
         return true;

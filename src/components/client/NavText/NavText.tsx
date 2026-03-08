@@ -15,8 +15,6 @@ interface NavTextProps {
 const NavText: React.FC<NavTextProps> = ({ to, text, end, onClick }) => {
   const pathname = usePathname();
 
-  // Next.js doesn't have an exact equivalent to NavLink 'end',
-  // but we can check if the pathname exactly matches or starts with the 'to' prop
   const isActive = end
     ? pathname === to
     : pathname.startsWith(to) && (to !== "/" || pathname === "/");

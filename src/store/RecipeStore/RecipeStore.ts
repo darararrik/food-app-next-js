@@ -85,7 +85,6 @@ export class RecipeStore implements ILocalStore {
         this._isLoading = false;
       });
     } catch (error) {
-      console.error(error);
       runInAction(() => {
         this._isLoading = false;
       });

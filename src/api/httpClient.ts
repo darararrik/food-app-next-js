@@ -8,20 +8,26 @@ export const HTTP_METHODS = {
 } as const;
 
 export const httpClient = {
-  post: async <T = any>(endpoint: string, data: any): Promise<T> => {
+  post: async <T = any>(
+    endpoint: string,
+    data: any,
+    fetchOptions: RequestInit = {},
+  ): Promise<T> => {
     return customFetch(endpoint, {
       method: HTTP_METHODS.POST,
       body: JSON.stringify(data),
+      ...fetchOptions,
     });
   },
 
   get: async <T = any>(
     endpoint: string,
-    options?: { params?: object },
+    options?: { params?: object; fetchOptions?: RequestInit },
   ): Promise<T> => {
     const url = buildUrl(endpoint, options?.params);
     return customFetch(url, {
       method: HTTP_METHODS.GET,
+      ...(options?.fetchOptions ?? {}),
     });
   },
 };

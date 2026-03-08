@@ -1,6 +1,7 @@
 import qs from "qs";
 
-const BASE_URL = "https://front-school-strapi.ktsdev.ru/api";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ?? "https://front-school-strapi.ktsdev.ru/api";
 
 export const customFetch = async (
   endpoint: string,
@@ -28,7 +29,6 @@ export const customFetch = async (
       const errorData = await response.json();
       errorMessage = errorData?.error?.message || errorMessage;
     } catch {
-      // If parsing fails, stick with the statusText
     }
     throw new Error(errorMessage);
   }
