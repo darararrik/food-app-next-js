@@ -1,4 +1,6 @@
 import { RecipeApi } from "@/api/recipe";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Text from "@/components/server/Text";
 import styles from "./page.module.scss";
 import HeroImage from "@/components/server/Recipes/Details/HeroImage/HeroImage";
@@ -11,16 +13,34 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-export default async function RecipeDetailPage({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const recipe = await RecipeApi.getRecipeById(id);
 
   if (!recipe) {
-    return (
-      <div className={styles.error}>
-        <Text>Recipe not found</Text>
-      </div>
-    );
+    return { title: "Recipe not found" };
+  }
+
+  return {
+    title: recipe.name,
+    description:
+      recipe.summary?.substring(0, 160) ||
+      `Delicious recipe for ${recipe.name}`,
+  };
+}
+
+export default async function RecipeDetailPage({ params }: Props) {
+  const { id } = await params;
+
+  let recipe;
+  try {
+    recipe = await RecipeApi.getRecipeById(id);
+  } catch {
+    notFound();
+  }
+
+  if (!recipe) {
+    notFound();
   }
 
   return (
@@ -34,9 +54,7 @@ export default async function RecipeDetailPage({ params }: Props) {
       </section>
       <section className={styles.content}>
         <div className={styles.summaryContainer}>
-          <Text view="p-16">
-            {recipe.summary ? (parse(recipe.summary) as string) : ""}
-          </Text>
+          <Text view="p-16">{recipe.summary ? parse(recipe.summary) : ""}</Text>
         </div>
         <IngredientsAndEquipment recipe={recipe} />
         <Directions direction={recipe.directions} />
