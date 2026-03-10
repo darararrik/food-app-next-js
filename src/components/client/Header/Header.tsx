@@ -7,7 +7,6 @@ import { useRootStore } from "@/store/RootStoreProvider";
 import styles from "./Header.module.scss";
 import logo from "@/assets/logo.svg";
 import Text from "@/components/server/Text/Text";
-import NavText from "@/components/client/NavText/NavText";
 import LoginModal from "@/components/client/LoginModal";
 import LogoutModal from "@/components/server/LogoutModal/LogoutModal";
 import CloseIcon from "@/components/server/icons/CloseIcon";
@@ -15,6 +14,7 @@ import classNames from "classnames";
 import MenuIcon from "@/components/server/icons/MenuIcon";
 import FavoriteIcon from "@/components/server/icons/FavoriteIcon";
 import UserIcon from "@/components/server/icons/UserIcon";
+import NavLinks from "@/components/server/NavLinks";
 
 const Header = observer(() => {
   const { userStore, favoriteStore } = useRootStore();
@@ -55,15 +55,10 @@ const Header = observer(() => {
         </Link>
 
         <nav className={classNames(styles.nav, styles.desktopNav)}>
-          <NavText to="/" text="Recipes" />
-          {isMounted && userStore.isAuthenticated && (
-            <>
-              <NavText to="/favorites" text="Favorites" />
-              <NavText to="/products" text="Products" />
-              <NavText to="/menu-items" text="Menu Items" />
-              <NavText to="/planning" text="Planning" />
-            </>
-          )}
+          <NavLinks
+            isMounted={isMounted}
+            isAuthenticated={userStore.isAuthenticated}
+          />
         </nav>
 
         <div
@@ -75,23 +70,11 @@ const Header = observer(() => {
             <CloseIcon />
           </button>
           <nav className={styles.mobileNav}>
-            <NavText to="/" text="Recipes" onClick={toggleMenu} />
-            {isMounted && userStore.isAuthenticated && (
-              <>
-                <NavText
-                  to="/favorites"
-                  text="Favorites"
-                  onClick={toggleMenu}
-                />
-                <NavText to="/products" text="Products" onClick={toggleMenu} />
-                <NavText
-                  to="/menu-items"
-                  text="Menu Items"
-                  onClick={toggleMenu}
-                />
-                <NavText to="/planning" text="Planning" onClick={toggleMenu} />
-              </>
-            )}
+            <NavLinks
+              isMounted={isMounted}
+              isAuthenticated={userStore.isAuthenticated}
+              onLinkClick={toggleMenu}
+            />
           </nav>
         </div>
 
