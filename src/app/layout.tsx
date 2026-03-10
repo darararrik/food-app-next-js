@@ -3,6 +3,8 @@ import { RootStoreProvider } from "@/store/RootStoreProvider";
 import Header from "@/components/client/Header/Header";
 import { StoreInitializer } from "@/store/StoreInitializer";
 import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { roboto } from "@/shared/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "Food App",
@@ -17,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body>
+      <body className={roboto.variable}>
         <RootStoreProvider>
           <StoreInitializer>
             <Header />

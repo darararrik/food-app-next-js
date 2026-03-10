@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { observer } from "mobx-react-lite";
 import { useRootStore } from "@/store/RootStoreProvider";
 import styles from "./Header.module.scss";
@@ -49,7 +50,7 @@ const Header = observer(() => {
         </button>
 
         <Link href="/" className={styles.logo}>
-          <img src={logo.src} alt="Logo" width={36} height={36} />
+          <Image src={logo.src} alt="Logo" width={36} height={36} />
           <Text view="p-20">Food Client</Text>
         </Link>
 

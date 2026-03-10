@@ -48,7 +48,7 @@ export class FavoriteStore {
         this._recipes = recipes;
         this._isLoading = false;
       });
-    } catch (error) {
+    } catch {
       runInAction(() => {
         this._isLoading = false;
       });
@@ -77,7 +77,6 @@ export class FavoriteStore {
           this._recipes.push(recipe);
         });
       }
-    } catch (error) {
-    }
+    } catch {}
   }
 }

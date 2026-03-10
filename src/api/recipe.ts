@@ -4,13 +4,23 @@ import type { StrapiResponse } from "@/types/StrapiResponse";
 import type { Recipe } from "@/types/models/Recipe";
 import { httpClient } from "./httpClient";
 
+type RecipeParams = {
+  populate: string[];
+  pagination?: { page: number; pageSize: number };
+  filters?: Record<string, unknown>;
+};
+
+type FavoriteResponse = {
+  data: { id: number; documentId: string };
+};
+
 export const RecipeApi = {
   getRecipes: async (
     page = 1,
     search = "",
     categories: string[] = [],
   ): Promise<StrapiResponse<Recipe[]>> => {
-    const params: any = {
+    const params: RecipeParams = {
       populate: ["images", "ingradients", "category"],
       pagination: {
         page,
@@ -86,7 +96,7 @@ export const RecipeApi = {
       }
 
       return [];
-    } catch (error) {
+    } catch {
       return [];
     }
   },
@@ -110,16 +120,19 @@ export const RecipeApi = {
   },
 
   saveRecipe: async (recipeId: string) => {
-    const response = await httpClient.post("/favorites/add", {
+    const response = await httpClient.post<FavoriteResponse>("/favorites/add", {
       recipe: recipeId,
     });
     return response.data;
   },
 
   deleteRecipe: async (recipeId: string) => {
-    const response = await httpClient.post(`/favorites/remove`, {
-      recipe: recipeId,
-    });
+    const response = await httpClient.post<FavoriteResponse>(
+      `/favorites/remove`,
+      {
+        recipe: recipeId,
+      },
+    );
     return response.data;
   },
 

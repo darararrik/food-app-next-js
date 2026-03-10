@@ -35,7 +35,7 @@ export class CategoryStore {
         this._isLoaded = true;
         this._isLoading = false;
       });
-    } catch (error) {
+    } catch {
       runInAction(() => {
         this._isLoading = false;
       });

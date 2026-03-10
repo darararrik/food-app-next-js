@@ -8,9 +8,9 @@ export const HTTP_METHODS = {
 } as const;
 
 export const httpClient = {
-  post: async <T = any>(
+  post: async <T = unknown>(
     endpoint: string,
-    data: any,
+    data: unknown,
     fetchOptions: RequestInit = {},
   ): Promise<T> => {
     return customFetch(endpoint, {
@@ -20,7 +20,7 @@ export const httpClient = {
     });
   },
 
-  get: async <T = any>(
+  get: async <T = unknown>(
     endpoint: string,
     options?: { params?: object; fetchOptions?: RequestInit },
   ): Promise<T> => {

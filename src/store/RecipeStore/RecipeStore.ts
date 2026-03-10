@@ -84,7 +84,7 @@ export class RecipeStore implements ILocalStore {
         this._totalPages = response.meta.pagination.pageCount;
         this._isLoading = false;
       });
-    } catch (error) {
+    } catch {
       runInAction(() => {
         this._isLoading = false;
       });

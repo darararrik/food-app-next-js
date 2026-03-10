@@ -4,13 +4,11 @@ import Button from "@/components/server/Button";
 import Text from "@/components/server/Text";
 import styles from "./error.module.scss";
 
-function Error({ error }: { error: Error }) {
+function Error() {
   return (
     <div className={styles.container}>
       <Text view="title">Произошла ошибка!</Text>
-      <Button onClick={() => window.location.reload()}>
-        Попробовать снова
-      </Button>
+      <Button onClick={() => window.location.reload()}>Try again</Button>
     </div>
   );
 }

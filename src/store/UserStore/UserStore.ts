@@ -29,50 +29,54 @@ export class UserStore {
     return !!this._token;
   }
 
-  async login(username: string, password: string) {
+  async login(username: string, password: string): Promise<boolean> {
     this._isLoading = true;
     this._error = null;
     try {
       const response = await authApi.login(username, password);
-      if (response.jwt) {
+      if (response && response.jwt) {
         this.setToken(response.jwt);
         return true;
       }
       return false;
-    } catch (err: any) {
-      this._error = err.message || "Login failed";
+    } catch (err: unknown) {
+      this._error = err instanceof Error ? err.message : "Login failed";
       return false;
     } finally {
       this._isLoading = false;
     }
   }
 
-  async register(username: string, email: string, password: string) {
+  async register(
+    username: string,
+    email: string,
+    password: string,
+  ): Promise<boolean> {
     this._isLoading = true;
     this._error = null;
     try {
       const response = await authApi.register(username, email, password);
-      if (response.jwt) {
+      if (response && response.jwt) {
         this.setToken(response.jwt);
         return true;
       }
       return false;
-    } catch (err: any) {
-      this._error = err.message || "Registration failed";
+    } catch (err: unknown) {
+      this._error = err instanceof Error ? err.message : "Registration failed";
       return false;
     } finally {
       this._isLoading = false;
     }
   }
 
-  logout() {
+  logout(): void {
     this._token = null;
     if (typeof window !== "undefined") {
       localStorage.removeItem("jwt");
     }
   }
 
-  private setToken(token: string) {
+  private setToken(token: string): void {
     this._token = token;
     if (typeof window !== "undefined") {
       localStorage.setItem("jwt", token);

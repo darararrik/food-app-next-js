@@ -1,15 +1,32 @@
-import React from 'react'
-import classNames from 'classnames'
-import styles from './Input.module.scss'
-export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> & {
-  value: string
-  onChange: (value: string) => void
-  afterSlot?: React.ReactNode
-}
+import React from "react";
+import classNames from "classnames";
+import styles from "./Input.module.scss";
+export type InputProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "onChange" | "value"
+> & {
+  value: string;
+  onChange: (value: string) => void;
+  afterSlot?: React.ReactNode;
+};
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ value, onChange, afterSlot, className, disabled, type = 'text', ...props }, ref) => {
+  (
+    {
+      value,
+      onChange,
+      afterSlot,
+      className,
+      disabled,
+      type = "text",
+      ...props
+    },
+    ref,
+  ) => {
     const hasAfterSlot =
-      afterSlot !== undefined && afterSlot !== null && afterSlot !== false && afterSlot !== ''
+      afterSlot !== undefined &&
+      afterSlot !== null &&
+      afterSlot !== false &&
+      afterSlot !== "";
 
     return (
       <div
@@ -24,11 +41,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           value={value}
           disabled={disabled}
           onChange={(e) => onChange(e.target.value)}
-          className={classNames(styles.input, { [styles.input_withAfter]: hasAfterSlot })}
+          className={classNames(styles.input, {
+            [styles.input_withAfter]: hasAfterSlot,
+          })}
         />
-        {hasAfterSlot && <div className={styles.inputAfterSlot}>{afterSlot}</div>}
+        {hasAfterSlot && (
+          <div className={styles.inputAfterSlot}>{afterSlot}</div>
+        )}
       </div>
-    )
+    );
   },
-)
-export default Input
+);
+Input.displayName = "Input";
+export default Input;

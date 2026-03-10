@@ -4,6 +4,7 @@ import styles from "./IngredientsAndEquipment.module.scss";
 import ingIcon from "@/assets/ing.svg";
 import eqIcon from "@/assets/eq.svg";
 import React from "react";
+import Image from "next/image";
 
 type IngredientsAndEquipmentProps = {
   recipe: Recipe;
@@ -21,9 +22,11 @@ const IngredientsAndEquipment: React.FC<IngredientsAndEquipmentProps> = ({
         <div className={styles.ingredientsGrid}>
           {recipe.ingredients?.map((ingredient) => (
             <div key={ingredient.id} className={styles.ingredient}>
-              <img
+              <Image
                 src={ingIcon.src || ingIcon}
                 alt="ingredient"
+                width={24}
+                height={24}
                 className={styles.icon}
               />
               <Text view="p-16">{`${ingredient.amount} ${ingredient.name}`}</Text>
@@ -42,9 +45,11 @@ const IngredientsAndEquipment: React.FC<IngredientsAndEquipmentProps> = ({
         <div className={styles.equipmentGrid}>
           {recipe.equipments?.map((equipment) => (
             <div key={equipment.id} className={styles.equipment}>
-              <img
+              <Image
                 src={eqIcon.src || eqIcon}
                 alt="equipment"
+                width={24}
+                height={24}
                 className={styles.icon}
               />
               <Text view="p-16">{equipment.name}</Text>

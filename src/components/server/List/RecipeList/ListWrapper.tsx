@@ -21,7 +21,7 @@ export const ListWrapper = observer(
       } else {
         currentStore.fetchRecipes();
       }
-    }, [initialRecipes]);
+    }, [initialRecipes, currentStore]);
     return (
       <RecipeList
         recipes={currentStore.recipes}
