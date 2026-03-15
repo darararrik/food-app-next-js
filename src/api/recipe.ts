@@ -19,6 +19,13 @@ export const RecipeApi = {
     page = 1,
     search = "",
     categories: string[] = [],
+    additionalFilters: {
+      rating?: number | null;
+      totalTime?: number | null;
+      cookingTime?: number | null;
+      preparationTime?: number | null;
+      vegetarian?: boolean | null;
+    } = {}
   ): Promise<StrapiResponse<Recipe[]>> => {
     const params: RecipeParams = {
       populate: ["images", "ingradients", "category"],
@@ -44,6 +51,51 @@ export const RecipeApi = {
           id: {
             $in: categories.map(Number),
           },
+        },
+      };
+    }
+
+    if (additionalFilters.rating != null) {
+      params.filters = {
+        ...params.filters,
+        rating: {
+          $gte: additionalFilters.rating,
+        },
+      };
+    }
+
+    if (additionalFilters.totalTime != null) {
+      params.filters = {
+        ...params.filters,
+        totalTime: {
+          $lte: additionalFilters.totalTime,
+        },
+      };
+    }
+
+    if (additionalFilters.cookingTime != null) {
+      params.filters = {
+        ...params.filters,
+        cookingTime: {
+          $lte: additionalFilters.cookingTime,
+        },
+      };
+    }
+
+    if (additionalFilters.preparationTime != null) {
+      params.filters = {
+        ...params.filters,
+        preparationTime: {
+          $lte: additionalFilters.preparationTime,
+        },
+      };
+    }
+
+    if (additionalFilters.vegetarian != null) {
+      params.filters = {
+        ...params.filters,
+        vegetarian: {
+          $eq: additionalFilters.vegetarian,
         },
       };
     }
@@ -160,5 +212,46 @@ export const RecipeApi = {
       data: response.data.map(toModel),
       meta: response.meta,
     };
+  },
+
+  getRandomRecipe: async (): Promise<Recipe | null> => {
+    try {
+      // First fetch to get the total count
+      const initialResponse = await httpClient.get<StrapiResponse<RecipeDto[]>>(
+        "/recipes",
+        {
+          params: {
+            pagination: { page: 1, pageSize: 1 },
+          },
+        }
+      );
+
+      const totalCount = initialResponse.meta.pagination.total;
+      if (totalCount === 0) return null;
+
+      // Pick a random starting point
+      const randomIndex = Math.floor(Math.random() * totalCount);
+
+      const randomResponse = await httpClient.get<StrapiResponse<RecipeDto[]>>(
+        "/recipes",
+        {
+          params: {
+            populate: [
+              "ingradients",
+              "equipments",
+              "directions.image",
+              "images",
+              "category",
+            ],
+            pagination: { start: randomIndex, limit: 1 },
+          },
+          fetchOptions: { cache: "no-store" }
+        }
+      );
+
+      return randomResponse.data.length > 0 ? toModel(randomResponse.data[0]) : null;
+    } catch {
+      return null;
+    }
   },
 };

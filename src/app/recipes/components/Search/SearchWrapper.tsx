@@ -19,8 +19,13 @@ export const SearchWrapper = observer(
         searchValue={store.searchQuery}
         selectedOptions={store.selectedOptions}
         options={initialCategories}
-        onSearch={(value) => updateQueryParams({ search: value })}
+        rating={store.rating}
+        totalTime={store.totalTime}
+        cookingTime={store.cookingTime}
+        preparationTime={store.preparationTime}
+        vegetarian={store.vegetarian}
         onFilter={(options) => updateQueryParams({ categories: options })}
+        onApplyFilters={(filters) => updateQueryParams(filters)}
       />
     );
   },

@@ -10,7 +10,12 @@ type PrivateFields =
   | "_totalPages"
   | "_searchQuery"
   | "_isLoading"
-  | "_selectedOptions";
+  | "_selectedOptions"
+  | "_rating"
+  | "_totalTime"
+  | "_cookingTime"
+  | "_preparationTime"
+  | "_vegetarian";
 
 export class RecipeStore implements ILocalStore {
   private _recipes: Recipe[] = [];
@@ -19,6 +24,11 @@ export class RecipeStore implements ILocalStore {
   private _searchQuery = "";
   private _selectedOptions: Option[] = [];
   private _isLoading = false;
+  private _rating: number | null = null;
+  private _totalTime: number | null = null;
+  private _cookingTime: number | null = null;
+  private _preparationTime: number | null = null;
+  private _vegetarian: boolean | null = null;
 
   constructor() {
     makeAutoObservable<RecipeStore, PrivateFields>(this);
@@ -47,6 +57,26 @@ export class RecipeStore implements ILocalStore {
   get isLoading(): boolean {
     return this._isLoading;
   }
+
+  get rating(): number | null {
+    return this._rating;
+  }
+
+  get totalTime(): number | null {
+    return this._totalTime;
+  }
+
+  get cookingTime(): number | null {
+    return this._cookingTime;
+  }
+
+  get preparationTime(): number | null {
+    return this._preparationTime;
+  }
+
+  get vegetarian(): boolean | null {
+    return this._vegetarian;
+  }
   setRecipes(recipes: Recipe[]) {
     this._recipes = recipes;
   }
@@ -71,6 +101,41 @@ export class RecipeStore implements ILocalStore {
     this._currentPage = page;
   }
 
+  setRating(rating: number | null) {
+    if (this._rating !== rating) {
+      this._rating = rating;
+      this._currentPage = 1;
+    }
+  }
+
+  setTotalTime(time: number | null) {
+    if (this._totalTime !== time) {
+      this._totalTime = time;
+      this._currentPage = 1;
+    }
+  }
+
+  setCookingTime(time: number | null) {
+    if (this._cookingTime !== time) {
+      this._cookingTime = time;
+      this._currentPage = 1;
+    }
+  }
+
+  setPreparationTime(time: number | null) {
+    if (this._preparationTime !== time) {
+      this._preparationTime = time;
+      this._currentPage = 1;
+    }
+  }
+
+  setVegetarian(isVeg: boolean | null) {
+    if (this._vegetarian !== isVeg) {
+      this._vegetarian = isVeg;
+      this._currentPage = 1;
+    }
+  }
+
   async fetchRecipes() {
     this._isLoading = true;
     try {
@@ -78,6 +143,13 @@ export class RecipeStore implements ILocalStore {
         this._currentPage,
         this._searchQuery,
         this._selectedOptions.map((o) => o.key),
+        {
+          rating: this._rating,
+          totalTime: this._totalTime,
+          cookingTime: this._cookingTime,
+          preparationTime: this._preparationTime,
+          vegetarian: this._vegetarian,
+        }
       );
       runInAction(() => {
         this._recipes = response.data;

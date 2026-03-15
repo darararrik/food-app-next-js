@@ -15,6 +15,8 @@ import MenuIcon from "@/components/server/icons/MenuIcon";
 import FavoriteIcon from "@/components/server/icons/FavoriteIcon";
 import UserIcon from "@/components/server/icons/UserIcon";
 import NavLinks from "@/components/server/NavLinks";
+import { RecipeApi } from "@/api/recipe";
+import { useRouter } from "next/navigation";
 
 const Header = observer(() => {
   const { userStore, favoriteStore } = useRootStore();
@@ -22,6 +24,8 @@ const Header = observer(() => {
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [isSearchingRandom, setIsSearchingRandom] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
@@ -40,6 +44,20 @@ const Header = observer(() => {
   const handleLoginModalClose = () => {
     setLoginModalOpen(false);
     favoriteStore.setShowLoginModal(false);
+  };
+
+  const handleRandomRecipe = async () => {
+    if (isSearchingRandom) return;
+    setIsSearchingRandom(true);
+    try {
+      const randomRecipe = await RecipeApi.getRandomRecipe();
+      if (randomRecipe) {
+        router.push(`/recipes/${randomRecipe.documentId}`);
+        if (isMenuOpen) setIsMenuOpen(false);
+      }
+    } finally {
+      setIsSearchingRandom(false);
+    }
   };
 
   return (
@@ -79,6 +97,17 @@ const Header = observer(() => {
         </div>
 
         <div className={styles.actions}>
+          {isMounted && (
+            <button 
+              className={styles.randomButton} 
+              onClick={handleRandomRecipe}
+              disabled={isSearchingRandom}
+              title="Get Random Recipe"
+            >
+              🎲
+            </button>
+          )}
+
           {isMounted && userStore.isAuthenticated && (
             <Link href="/favorites">
               <FavoriteIcon width={20} height={20} />

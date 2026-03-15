@@ -75,14 +75,25 @@
   flex-shrink: 0;
 
   a,
-  .actionIcon {
+  .actionIcon,
+  .randomButton {
     @include mix.flex-center;
     color: $brand-color;
     cursor: pointer;
     transition: transform 0.2s;
+    background: none;
+    border: none;
+    font-size: 20px;
+    padding: 0;
 
     &:hover {
       transform: scale(1.1);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
     }
   }
 }

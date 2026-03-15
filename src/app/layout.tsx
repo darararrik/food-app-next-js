@@ -3,7 +3,6 @@ import { RootStoreProvider } from "@/store/RootStoreProvider";
 import Header from "@/components/client/Header/Header";
 import { StoreInitializer } from "@/store/StoreInitializer";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { roboto } from "@/shared/fonts/fonts";
 
 export const metadata: Metadata = {

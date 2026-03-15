@@ -18,9 +18,24 @@ export const useRecipesSearchParams = (
     const query = searchParams.get("search") || "";
     const page = parseInt(searchParams.get("page") || "1", 10);
     const categoriesParams = searchParams.get("categories");
+    const ratingParam = searchParams.get("rating");
+    const totalTimeParam = searchParams.get("totalTime");
+    const cookingTimeParam = searchParams.get("cookingTime");
+    const preparationTimeParam = searchParams.get("preparationTime");
+    const vegetarianParam = searchParams.get("vegetarian");
 
     store.setSearchQuery(query);
     store.setCurrentPage(page);
+    store.setRating(ratingParam ? Number(ratingParam) : null);
+    store.setTotalTime(totalTimeParam ? Number(totalTimeParam) : null);
+    store.setCookingTime(cookingTimeParam ? Number(cookingTimeParam) : null);
+    store.setPreparationTime(
+      preparationTimeParam ? Number(preparationTimeParam) : null,
+    );
+    store.setVegetarian(
+      vegetarianParam !== null ? vegetarianParam === "true" : null,
+    );
+
     if (!categoriesParams) {
       store.setSelectedOptions([]);
     } else if (categories.length > 0) {
@@ -45,6 +60,11 @@ export const useRecipesSearchParams = (
     search?: string;
     page?: number;
     categories?: Option[];
+    rating?: number | null;
+    totalTime?: number | null;
+    cookingTime?: number | null;
+    preparationTime?: number | null;
+    vegetarian?: boolean | null;
   }) => {
     const newParams = new URLSearchParams(searchParams);
 
@@ -67,6 +87,41 @@ export const useRecipesSearchParams = (
       } else {
         newParams.delete("categories");
       }
+      newParams.set("page", "1");
+    }
+
+    if (params.rating !== undefined) {
+      if (params.rating !== null)
+        newParams.set("rating", params.rating.toString());
+      else newParams.delete("rating");
+      newParams.set("page", "1");
+    }
+
+    if (params.totalTime !== undefined) {
+      if (params.totalTime !== null)
+        newParams.set("totalTime", params.totalTime.toString());
+      else newParams.delete("totalTime");
+      newParams.set("page", "1");
+    }
+
+    if (params.cookingTime !== undefined) {
+      if (params.cookingTime !== null)
+        newParams.set("cookingTime", params.cookingTime.toString());
+      else newParams.delete("cookingTime");
+      newParams.set("page", "1");
+    }
+
+    if (params.preparationTime !== undefined) {
+      if (params.preparationTime !== null)
+        newParams.set("preparationTime", params.preparationTime.toString());
+      else newParams.delete("preparationTime");
+      newParams.set("page", "1");
+    }
+
+    if (params.vegetarian !== undefined) {
+      if (params.vegetarian !== null)
+        newParams.set("vegetarian", params.vegetarian ? "true" : "false");
+      else newParams.delete("vegetarian");
       newParams.set("page", "1");
     }
 
