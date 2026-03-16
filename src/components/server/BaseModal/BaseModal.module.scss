@@ -1,0 +1,47 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as mix;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: rgb(235, 233, 233);
+  padding: 32px;
+  border-radius: $border-radius;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  @include mix.respond(xl) {
+    width: 400px;
+  }
+  @include mix.respond(sm) {
+    width: 320px;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-secondary-color;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $text-primary-color;
+  }
+}

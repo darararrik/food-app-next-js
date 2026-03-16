@@ -1,0 +1,56 @@
+:root {
+  --loader-color: #b5460f;
+}
+
+$brand-color: #b5460f;
+$brand-hover-color: #b5460fb2;
+$brand-active-color: #872d01;
+$background-color: #ffc0763b;
+$loader-bg-color: $brand-color;
+
+$button-primary-bg-color: $brand-color;
+$button-primary-text-color: #ffffff;
+$button-primary-bg-hover-color: $brand-hover-color;
+$button-primary-bg-disabled-color: #d9d9d9;
+$button-primary-text-disabled-color: #ffffff;
+$button-primary-bg-active-color: $brand-active-color;
+
+$text-primary-color: #000000;
+$text-secondary-color: #afadb5;
+$error-text-color: #ff4d4f;
+$font-family: var(--font-roboto), sans-serif;
+
+$breakpoints: (
+  "sm": 375px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1440px,
+);
+// Spacing
+$space-xl: 24px;
+$space-l: 20px;
+$space-m: 16px;
+$space-s: 14px;
+$space-xs: 12px;
+$space-xxs: 8px;
+
+$border-radius: 10px;
+
+// Checkbox
+$checkbox-bg: #fff;
+$checkbox-border: #fff;
+$checkbox-border-hover: $brand-color;
+
+// Input
+$input-bg: #fff;
+$input-border: #fff;
+$input-border-focus: $brand-color;
+$input-placeholder: $text-secondary-color;
+$input-bg-disabled: #fff;
+
+// Dropdown
+$dropdown-options-bg: #fff;
+$dropdown-option-hover-bg: #f5f5f5;
+
+//Card
+$card-bg: #fff;

@@ -1,0 +1,32 @@
+@use '@/shared/styles/variables' as *;
+@use '@/shared/styles/mixins' as *;
+.loader {
+  display: inline-block;
+  border-radius: 100%;
+  border-style: solid;
+  border-color: var(--loader-color);
+  border-right-color: transparent !important;
+  animation: loader-spinner 0.8s linear infinite;
+  box-sizing: border-box;
+}
+
+@keyframes loader-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader_size-s {
+  @include square(24px);
+  border-width: 2px;
+}
+
+.loader_size-m {
+  @include square(48px);
+  border-width: 4px;
+}
+
+.loader_size-l {
+  @include square(60px);
+  border-width: 6px;
+}

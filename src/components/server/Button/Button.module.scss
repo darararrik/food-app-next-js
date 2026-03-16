@@ -1,0 +1,36 @@
+@use '@/shared/styles/variables' as *;
+
+.button {
+  color: $button-primary-text-color;
+  background-color: $button-primary-bg-color;
+  border: none;
+  padding: $space-s $space-l;
+  font-size: 18px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: $space-xxs;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+
+  &__loader {
+    border-color: $button-primary-text-color;
+  }
+
+  &:hover {
+    background-color: $button-primary-bg-hover-color;
+  }
+
+  &:active {
+    background-color: $button-primary-bg-active-color;
+  }
+
+  &:disabled {
+    background-color: $button-primary-bg-disabled-color;
+    color: $button-primary-text-disabled-color;
+    cursor: not-allowed;
+  }
+}

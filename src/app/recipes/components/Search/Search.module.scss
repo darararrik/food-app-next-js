@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.topRow {
+  display: flex;
+  gap: 19px;
+  width: 100%;
+}
+
+.search {
+  display: flex;
+  gap: 19px;
+  flex: 1;
+}
+
+.bottomRow {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.multiDropdown {
+  width: 300px;
+}
+
+.extraFilters {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  // Make inputs smaller in the filter row
+  & > div {
+    flex: 1;
+    min-width: 150px;
+  }
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--brand-color, #b5460f);
+  }
+}

@@ -1,0 +1,18 @@
+@use '@/shared/styles/variables' as *;
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon_color-primary {
+  color: $text-primary-color;
+}
+
+.icon_color-secondary {
+  color: $text-secondary-color;
+}
+
+.icon_color-accent {
+  color: $brand-color;
+}
