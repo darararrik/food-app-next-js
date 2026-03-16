@@ -98,8 +98,8 @@ const Header = observer(() => {
 
         <div className={styles.actions}>
           {isMounted && (
-            <button 
-              className={styles.randomButton} 
+            <button
+              className={styles.randomButton}
               onClick={handleRandomRecipe}
               disabled={isSearchingRandom}
               title="Get Random Recipe"
@@ -114,11 +114,7 @@ const Header = observer(() => {
             </Link>
           )}
           <div className={styles.actionIcon} onClick={handleUserClick}>
-            <UserIcon
-              color={
-                isMounted && userStore.isAuthenticated ? "primary" : "accent"
-              }
-            />
+            <UserIcon color={"accent"} />
           </div>
         </div>
       </div>
